@@ -4,12 +4,16 @@ from datetime import date
 
 @dataclass(slots=True, frozen=True)
 class Termination:
+    """Represents the calculated termination payments."""
+
     proportional_thirteenth_salary: int
     proportional_paid_leave: int
 
 
 @dataclass(slots=True)
 class Employee:
+    """Represents an employee and calculates termination-related payments."""
+
     salary: int
     start_date: date
     active: bool = True
@@ -23,6 +27,7 @@ class Employee:
         return self.end_date
 
     def _count_proportional_months(self, start: date, end: date) -> int:
+        """Count months with at least 15 worked days between two dates."""
         months = 0
         current = date(start.year, start.month, 1)
 
